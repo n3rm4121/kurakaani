@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { supabase } from '@/supabase/supabaseClient';
+import { supabase } from '@/lib/supabase/supabaseClient';
 import { Alert } from '../components/ui/alert';
 import { Button } from '../components/ui/button';
 import { FaGithub, FaGoogle } from 'react-icons/fa6';
 
-const LoginPage: React.FC = () => {
+export const Login = () => {
     const [error, setError] = useState<string | null>(null);
 
     const handleGoogleLogin = async () => {
@@ -62,4 +62,3 @@ const LoginPage: React.FC = () => {
     );
 };
 
-export default LoginPage;

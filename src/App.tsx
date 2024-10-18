@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Suspense, lazy } from 'react'
 import RootLayout from './layouts/RootLayout'
-import LoginPage from './pages/LoginPage'
+import { Login } from './pages/Login'
 import { useAuth } from './hooks/useAuth'
 
 const Home = lazy(() => import('./pages/Home'))
@@ -23,7 +23,7 @@ export default function App() {
             <Route
               path="login"
               element={
-                user ? <Navigate to="/" replace /> : <LoginPage />
+                user ? <Navigate to="/" replace /> : <Login />
               }
             />
           </Route>

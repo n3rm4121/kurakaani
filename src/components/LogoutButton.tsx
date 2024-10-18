@@ -1,4 +1,4 @@
-import { signOut } from "@/supabase/supabaseClient"
+import { signOut } from "@/lib/supabase/supabaseClient"
 import { Button } from "./ui/button"
 import { LogOut } from "lucide-react"
 

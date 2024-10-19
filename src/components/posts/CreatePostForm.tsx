@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
@@ -11,6 +11,7 @@ import { z } from 'zod'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import Loader from '../Loader'
 import { toast } from '@/hooks/use-toast'
+import { PostContext } from '@/contexts/postContext'
 
 const formSchema = z.object({
     title: z.string().min(3, { message: "Title must be at least 3 characters long" }),
@@ -21,6 +22,13 @@ const formSchema = z.object({
 export const CreatePostForm = ({ user }: { user: User }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [previewImage, setPreviewImage] = useState<File | null>(null)
+    const postContext = useContext(PostContext);
+
+    if (!postContext) {
+        throw new Error('PostContext is undefined. Ensure PostForm is wrapped in PostProvider.');
+    }
+
+    const { addPost } = postContext;
 
     async function uploadImageAndGetPublicURL(file: File) {
 
@@ -59,15 +67,27 @@ export const CreatePostForm = ({ user }: { user: User }) => {
 
             //console.log("publicURL", publicURL)
 
-            await supabase.from('posts').insert([
+            const { data: newPost } = await supabase.from('posts').insert([
                 {
                     title: title,
                     content: content,
                     image_url: publicURL?.publicUrl,
                     owner: { id: user.id, avatar_url: user.user_metadata.avatar_url, name: user.user_metadata.full_name }
                 }
-            ])
+            ]).select();
 
+            if (!newPost) {
+                setIsLoading(false);
+                toast({
+                    variant: "destructive",
+                    title: "Uh oh! Something went wrong.",
+                    description: "There was a problem while creating your post.",
+                })
+                return;
+            }
+
+            // console.log("newPost", newPost)
+            addPost(newPost[0])
             setIsLoading(false);
             form.reset();
             setPreviewImage(null)

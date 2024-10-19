@@ -1,6 +1,5 @@
 import { PostList } from '@/components/posts/PostList'
 import { useAuth } from '../hooks/useAuth'
-import { CreatePostForm } from '@/components/posts/CreatePostForm'
 import { LeftSidebar } from '@/components/layout/LeftSidebar'
 import { RightSidebar } from '@/components/layout/RightSidebar'
 import MobileNavigation from '@/components/layout/MobileNavigation'

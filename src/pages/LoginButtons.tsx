@@ -4,7 +4,7 @@ import { Alert } from '../components/ui/alert';
 import { Button } from '../components/ui/button';
 import { FaGithub, FaGoogle } from 'react-icons/fa6';
 
-export const Login = () => {
+export const LoginButtons = () => {
     const [error, setError] = useState<string | null>(null);
 
     const handleGoogleLogin = async () => {

@@ -2,22 +2,18 @@ import { useEffect, useState } from 'react'
 import { User } from '@supabase/supabase-js'
 import { Button } from "@/components/ui/button"
 import { supabase } from '@/lib/supabase/supabaseClient'
-import { UserAvatar } from './UserAvatar'
-import { LogoutButton } from './LogoutButton'
+import { UserAvatar } from '../user/UserAvatar'
+import { LogoutButton } from '../auth/LogoutButton'
 import { Link } from 'react-router-dom'
-import { CreatePostBtn } from './CreatePostBtn'
 import {
     Dialog,
     DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import LoginForm from './LoginForm'
-import { Login } from '@/pages/Login'
+import { LoginButtons } from '@/pages/LoginButtons'
 export const Navbar = () => {
     const [user, setUser] = useState<User | null>(null)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -87,7 +83,7 @@ export const Navbar = () => {
                                         <DialogDescription>
                                             Join KuraKaani to share your thoughts and stay connected with the world.
                                         </DialogDescription>
-                                        <Login />
+                                        <LoginButtons />
                                         <DialogFooter className="sm:justify-start">
                                             <DialogClose asChild>
                                                 <Button type="button" variant="secondary">

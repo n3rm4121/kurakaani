@@ -1,7 +1,7 @@
-import { Navbar } from '@/components/Navbar'
+import { Navbar } from '@/components/layout/Navbar'
 import { Outlet } from 'react-router-dom'
-import { Footer } from '@/components/Footer'
-import { MaxWidthWrapper } from '@/components/MaxWidthWrapper'
+import { Footer } from '@/components/layout/Footer'
+import { MaxWidthWrapper } from '@/components/layout/MaxWidthWrapper'
 
 
 export default function RootLayout() {

@@ -1,27 +1,18 @@
-import { Button } from './ui/button'
 import { Repeat2 } from 'lucide-react'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { supabase } from '@/lib/supabase/supabaseClient'
 import { GetPostsResponse } from './PostList'
 import { useState } from 'react'
-import { Card, CardContent, CardFooter, CardHeader } from './ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '../ui/card'
 import { HeartFilledIcon } from '@radix-ui/react-icons'
 import { useAuth } from '@/hooks/useAuth'
+import { NotLoggedInDialog } from '../auth/NotLoggedIn'
 
 const MAX_CONTENT_LENGTH_TO_SHOW = 100
 
 interface PostCardProps {
     post: GetPostsResponse;
     ownerId: string;
-}
-
-
-const NotLoggedIn = () => {
-    return (
-        <div className="flex items-center justify-center h-32">
-            <p className="text-gray-600">Please log in to like and repost</p>
-        </div>
-    )
 }
 
 const timeSince = (date: Date) => {
@@ -56,16 +47,19 @@ export const PostCard = ({ post, ownerId }: PostCardProps) => {
     const [isReposted, setIsReposted] = useState(post.reposted_by?.includes(ownerId));
     const [repostCount, setRepostCount] = useState<number>(post.repost_count);
     const [error, setError] = useState<string | null>(null);
+    const [showLoginDialog, setShowLoginDialog] = useState(false);
     const { user } = useAuth();
 
-    const isOwner: boolean = post.owner.id === ownerId;
 
     const likedByArray = post.liked_by ?? [];
     const repostedByArray = post.reposted_by ?? [];
 
     const handleLike = async (postId: string) => {
         try {
-
+            if (!user) {
+                setShowLoginDialog(true);
+                return;
+            }
             const newLikedBy = isLiked
                 ? likedByArray.filter((id) => id !== ownerId)
                 : [...likedByArray, ownerId];
@@ -94,7 +88,7 @@ export const PostCard = ({ post, ownerId }: PostCardProps) => {
     const handleRepost = async (postId: string) => {
         try {
             if (!user) {
-                return <NotLoggedIn />
+                return <NotLoggedInDialog isOpen={showLoginDialog} setIsOpen={setShowLoginDialog} />
             }
             const newRepostedBy = isReposted
                 ? repostedByArray.filter((id) => id !== ownerId)
@@ -112,9 +106,8 @@ export const PostCard = ({ post, ownerId }: PostCardProps) => {
             if (error) throw error;
 
             if (updatedData && updatedData.length > 0) {
-                // Use the actual data from the response to update state
                 setRepostCount(updatedData[0].repost_count);
-                setIsReposted(!isReposted); // Toggle reposted state
+                setIsReposted(!isReposted);
             }
         } catch (error) {
             console.error('Error reposting post:', (error as Error).message);
@@ -125,6 +118,7 @@ export const PostCard = ({ post, ownerId }: PostCardProps) => {
 
     return (
         <div className="space-y-6">
+            <NotLoggedInDialog isOpen={showLoginDialog} setIsOpen={setShowLoginDialog} />
 
             <Card key={post.id}>
                 <CardHeader>

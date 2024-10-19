@@ -1,5 +1,4 @@
 import { signOut } from "@/lib/supabase/supabaseClient"
-import { Button } from "./ui/button"
 import { LogOut } from "lucide-react"
 import {
     Dialog,
@@ -10,6 +9,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import { Button } from "../ui/button"
 
 export const LogoutButton = () => {
     return (

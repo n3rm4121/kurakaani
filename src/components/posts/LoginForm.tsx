@@ -1,6 +1,5 @@
-import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Login } from '@/pages/Login'
+import { LoginButtons } from '@/pages/LoginButtons'
 
 function LoginForm() {
     return (
@@ -13,7 +12,7 @@ function LoginForm() {
                     Join KuraKaani to share your thoughts and stay connected with the world.
                 </p>
                 <div className="space-y-2">
-                    <Login />
+                    <LoginButtons />
                 </div>
             </CardContent>
         </Card>

@@ -1,10 +1,10 @@
-import { PostList } from '@/components/PostList'
+import { PostList } from '@/components/posts/PostList'
 import { useAuth } from '../hooks/useAuth'
 
 import { User } from '@supabase/supabase-js'
-import { CreatePostForm } from '@/components/CreatePostForm'
-import { LeftSidebar } from '@/components/LeftSidebar'
-import { RightSidebar } from '@/components/RightSidebar'
+import { CreatePostForm } from '@/components/posts/CreatePostForm'
+import { LeftSidebar } from '@/components/layout/LeftSidebar'
+import { RightSidebar } from '@/components/layout/RightSidebar'
 
 export default function Home() {
     const { user } = useAuth()

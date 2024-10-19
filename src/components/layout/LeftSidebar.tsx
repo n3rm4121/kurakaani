@@ -9,9 +9,7 @@ import {
     LineChart,
     ScrollText
 } from "lucide-react"
-import { GitHubLogoIcon } from "@radix-ui/react-icons"
-import { Login } from "@/pages/Login"
-import LoginForm from "./LoginForm"
+import LoginForm from "../posts/LoginForm"
 
 interface LeftSidebarProps {
     user: User | null

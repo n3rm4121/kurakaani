@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Input } from './ui/input'
-import { Button } from './ui/button'
-import { Textarea } from './ui/textarea'
+import { Input } from '../ui/input'
+import { Button } from '../ui/button'
+import { Textarea } from '../ui/textarea'
 import { supabase } from '@/lib/supabase/supabaseClient'
 import { User } from '@supabase/supabase-js'
 import { v4 as uuidv4 } from 'uuid';
@@ -10,18 +10,7 @@ import { Circle } from 'lucide-react'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from 'zod'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
-interface Post {
-    title: string,
-    content: string,
-    image?: File | null,
-    owner: {
-        id: string,
-        avatar_url: string,
-        name: string,
-    }
-    created_at?: string,
-}
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 
 const formSchema = z.object({
     title: z.string().min(3, { message: "Title must be at least 3 characters long" }),

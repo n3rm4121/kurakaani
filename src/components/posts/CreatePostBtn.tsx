@@ -1,5 +1,4 @@
-import { CreatePostForm } from "./CreatePostForm"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 import {
     Dialog,
     DialogClose,
@@ -23,17 +22,6 @@ export const CreatePostBtn = () => {
                         You can always access your content by signing back in.
                     </DialogDescription>
                 </DialogHeader>
-
-                {/* <Button
-                    onClick={signOut}
-                    variant="destructive"
-                    className="w-full flex items-center justify-center space-x-2"
-                >
-                    <LogOut className="h-5 w-5" />
-                    Log Out
-                </Button> */}
-
-
                 <DialogClose asChild>
                     <Button type="button" variant="secondary">
                         Cancel

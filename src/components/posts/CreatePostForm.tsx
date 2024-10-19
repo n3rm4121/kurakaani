@@ -5,12 +5,12 @@ import { Textarea } from '../ui/textarea'
 import { supabase } from '@/lib/supabase/supabaseClient'
 import { User } from '@supabase/supabase-js'
 import { v4 as uuidv4 } from 'uuid';
-import { useToast } from "@/hooks/use-toast"
-import { Circle } from 'lucide-react'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from 'zod'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
+import Loader from '../Loader'
+import { toast } from '@/hooks/use-toast'
 
 const formSchema = z.object({
     title: z.string().min(3, { message: "Title must be at least 3 characters long" }),
@@ -19,7 +19,6 @@ const formSchema = z.object({
 })
 
 export const CreatePostForm = ({ user }: { user: User }) => {
-    const { toast } = useToast();
     const [isLoading, setIsLoading] = useState(false)
     const [previewImage, setPreviewImage] = useState<File | null>(null)
 
@@ -74,7 +73,7 @@ export const CreatePostForm = ({ user }: { user: User }) => {
             setPreviewImage(null)
             toast({
                 title: "Post created successfully",
-                description: "Your post has been created successfully",
+                description: "Your post has been successfully created.",
             })
 
 
@@ -100,81 +99,79 @@ export const CreatePostForm = ({ user }: { user: User }) => {
     })
 
     return (
-        <div className="bg-white shadow rounded-lg mb-8">
 
-            <div className="p-4">
+        <div className="p-4">
 
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)}>
 
-                        <FormField
-                            control={form.control}
-                            name="title"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Title*</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} placeholder="Post title" required={true} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="content"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Content*</FormLabel>
-                                    <FormControl>
-                                        <Textarea {...field} placeholder="Share your thoughts..." required={true} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="image"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Image (Optional)</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            type="file"
-                                            placeholder="Image (optional)"
-                                            onChange={(e) => {
-                                                field.onChange(e.target.files?.[0] as File)
-                                                setPreviewImage(e.target.files?.[0] as File)
-                                            }}
-                                            className="file:mr-4 h-12 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        {previewImage && (
-
-                            <div>
-                                <img src={URL.createObjectURL(previewImage)} alt="Post" className="mb-4 h-48 w-96 object-scale-down" />
-                            </div>
+                    <FormField
+                        control={form.control}
+                        name="title"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Title*</FormLabel>
+                                <FormControl>
+                                    <Input {...field} placeholder="Post title" required={true} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
                         )}
-                        <Button type="submit" disabled={isLoading || !(form.getValues().content && form.getValues().title)} className='mt-2'>
-                            {isLoading ? (
-                                <>
-                                    <Circle className="animate-spin h-5 w-5" />
-                                    Posting...
-                                </>
-                            ) : (
-                                "Post"
-                            )}
-                        </Button>
+                    />
+                    <FormField
+                        control={form.control}
+                        name="content"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Content*</FormLabel>
+                                <FormControl>
+                                    <Textarea {...field} placeholder="Share your thoughts..." required={true} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="image"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Image (Optional)</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        type="file"
+                                        placeholder="Image (optional)"
+                                        onChange={(e) => {
+                                            field.onChange(e.target.files?.[0] as File)
+                                            setPreviewImage(e.target.files?.[0] as File)
+                                        }}
+                                        className="file:mr-4 h-12 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    {previewImage && (
+
+                        <div>
+                            <img src={URL.createObjectURL(previewImage)} alt="Post" className="mb-4 h-48 w-96 object-scale-down" />
+                        </div>
+                    )}
+                    <Button type="submit" disabled={isLoading || !(form.getValues().content && form.getValues().title)} className='mt-4 w-full'>
+                        {isLoading ? (
+                            <>
+                                <Loader size="sm" variant='secondary' />
+                                Posting...
+                            </>
+                        ) : (
+                            "Post"
+                        )}
+                    </Button>
 
 
-                    </form>
-                </Form>
-            </div>
+                </form>
+            </Form>
         </div>
 
     )

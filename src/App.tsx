@@ -3,16 +3,15 @@ import { Suspense, lazy } from 'react'
 import RootLayout from './components/layout/RootLayout'
 // import { Login } from './pages/Login'
 import { useAuth } from './hooks/useAuth'
+import Loader from './components/Loader'
 
 const Home = lazy(() => import('./pages/Home'))
 
 export default function App() {
   const { user, loading } = useAuth();
   if (loading) {
-    return <div>Loading...</div>
+    return <Loader size='md' centered />
   }
-
-
 
   return (
     <BrowserRouter>

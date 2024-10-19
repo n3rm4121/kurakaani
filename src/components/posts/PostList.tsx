@@ -2,6 +2,9 @@ import { useAuth } from '@/hooks/useAuth'
 import { supabase } from '@/lib/supabase/supabaseClient'
 import { useEffect, useState } from 'react'
 import { PostCard } from './PostCard';
+import { toast } from '@/hooks/use-toast';
+import { Circle } from 'lucide-react';
+import Loader from '../Loader';
 
 export interface GetPostsResponse {
     id: string
@@ -55,15 +58,17 @@ export const PostList = () => {
                 likedBy: post.liked_by
             })))
         } catch (error) {
-            console.error('Error fetching posts:', error)
+            toast({ title: 'Error fetching posts', description: (error as Error).message, variant: 'destructive' })
         } finally {
             setLoading(false)
         }
     }
 
     if (loading) {
-        return <div>Loading posts...</div>
+        return <Loader size="md" centered={true} />
     }
+
+
 
     return (
         <div className="space-y-4">

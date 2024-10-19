@@ -12,13 +12,12 @@ export default function Home() {
         <div className="mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
-                <div className="hidden md:block md:col-span-2">
+                <div className="hidden md:block md:col-span-3">
                     <LeftSidebar user={user} />
                 </div>
 
-                <div className="col-span-1 md:col-span-7">
+                <div className="col-span-1 md:col-span-6">
                     <div className="max-w-3xl mx-auto">
-                        {user && <CreatePostForm user={user} />}
                         <PostList />
                     </div>
                 </div>

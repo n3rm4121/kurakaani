@@ -41,8 +41,11 @@ export const Navbar = () => {
                         KuraKaani
                     </Link>
 
-                    <div className="flex items-center gap-4">
 
+                    <div className="flex items-center gap-4">
+                        <Link to='/docs' className='text-lg text-primary cursor-pointer'>
+                            Docs
+                        </Link>
                         {user ? (
                             <>
                                 <Dialog>

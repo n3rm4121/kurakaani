@@ -4,6 +4,7 @@ import RootLayout from './components/layout/RootLayout'
 // import { Login } from './pages/Login'
 import { useAuth } from './hooks/useAuth'
 import Loader from './components/Loader'
+import Docs from './pages/Docs'
 
 const Home = lazy(() => import('./pages/Home'))
 
@@ -25,6 +26,8 @@ export default function App() {
                 user ? <Navigate to="/" replace /> : <Login />
               }
             /> */}
+            <Route path='/docs' element={<Docs />} />
+            <Route path="*" element={<div>Not Found</div>} />
           </Route>
         </Routes>
       </Suspense>

@@ -34,31 +34,34 @@ export const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="p-8 bg-white shadow-md rounded-md w-full max-w-md">
-                <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
 
-                {error && <Alert variant='destructive'>{error}</Alert>}
+        <>
+            {error && <Alert variant='destructive'>{error}</Alert>}
 
-                <Button
-                    variant="outline"
-                    className="w-full flex items-center justify-center space-x-2 mb-4"
-                    onClick={handleGoogleLogin}
-                >
-                    <FaGoogle size={20} />
-                    <span>Login with Google</span>
-                </Button>
+            <Button
+                variant="outline"
+                className="w-full flex items-center justify-center space-x-2"
+                onClick={handleGoogleLogin}
+            >
+                <FaGoogle size={20} />
+                <span>Login with Google</span>
+            </Button>
 
-                <Button
-                    variant="outline"
-                    className="w-full flex items-center justify-center space-x-2"
-                    onClick={handleGithubLogin}
-                >
-                    <FaGithub size={20} />
-                    <span>Login with GitHub</span>
-                </Button>
+            <div className="flex items-center justify-center">
+                <div className="h-px bg-gray-300 w-1/2"></div>
+                <span className="text-gray-400">OR</span>
+                <div className="h-px bg-gray-300 w-1/2"></div>
             </div>
-        </div>
+
+            <Button
+                variant="outline"
+                className="w-full flex items-center justify-center space-x-2"
+                onClick={handleGithubLogin}
+            >
+                <FaGithub size={20} />
+                <span>Login with GitHub</span>
+            </Button>
+        </>
     );
 };
 

@@ -11,10 +11,16 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from 'zod'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
-interface post {
+interface Post {
     title: string,
     content: string,
-    image?: File | null
+    image?: File | null,
+    owner: {
+        id: string,
+        avatar_url: string,
+        name: string,
+    }
+    created_at?: string,
 }
 
 const formSchema = z.object({
@@ -70,7 +76,7 @@ export const CreatePostForm = ({ user }: { user: User }) => {
                     title: title,
                     content: content,
                     image_url: publicURL?.publicUrl,
-                    user_id: user.id
+                    owner: { id: user.id, avatar_url: user.user_metadata.avatar_url, name: user.user_metadata.full_name }
                 }
             ])
 
@@ -103,54 +109,11 @@ export const CreatePostForm = ({ user }: { user: User }) => {
             image: null
         }
     })
+
     return (
         <div className="bg-white shadow rounded-lg mb-8">
 
             <div className="p-4">
-                {/* <form onSubmit={handlePostSubmit}>
-                    <Input
-                        placeholder="Post title"
-                        value={newPost.title}
-                        onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
-                        className="mb-4"
-                        required={true}
-                        accept='image/*'
-                    />
-                    <Textarea
-                        placeholder="Share your thoughts..."
-                        value={newPost.content}
-                        onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
-                        className="mb-4"
-                        required={true}
-                    />
-
-                    <Input
-                        type="file"
-                        placeholder="Image (optional)"
-                        onChange={(e) => setNewPost({ ...newPost, image: e.target.files?.[0] as File })}
-                        className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
-                        required={false}
-                    />
-
-                    {newPost.image && (
-                        <div>
-
-                            <img src={URL.createObjectURL(newPost.image)} alt="Post" className="mb-4 h-48 w-96 object-scale-down" />
-                        </div>
-                    )}
-
-                    <Button type="submit" disabled={isLoading} className="bg-emerald-600 hover:bg-emerald-700">
-                        {isLoading ? (
-                            <>
-                                <Circle className="animate-spin h-5 w-5" />
-                                Posting...
-                            </>
-                        ) : (
-                            "Post"
-                        )}
-                    </Button>
-
-                </form> */}
 
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -195,7 +158,7 @@ export const CreatePostForm = ({ user }: { user: User }) => {
                                                 field.onChange(e.target.files?.[0] as File)
                                                 setPreviewImage(e.target.files?.[0] as File)
                                             }}
-                                            className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+                                            className="file:mr-4 h-12 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -208,7 +171,7 @@ export const CreatePostForm = ({ user }: { user: User }) => {
                                 <img src={URL.createObjectURL(previewImage)} alt="Post" className="mb-4 h-48 w-96 object-scale-down" />
                             </div>
                         )}
-                        <Button type="submit" disabled={isLoading} className="bg-emerald-600 hover:bg-emerald-700 mt-4">
+                        <Button type="submit" disabled={isLoading || !(form.getValues().content && form.getValues().title)} className='mt-2'>
                             {isLoading ? (
                                 <>
                                     <Circle className="animate-spin h-5 w-5" />

@@ -57,7 +57,7 @@ VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
    ```bash
    npm run dev
    ```
-   The app should now be running at ``http://localhost:3000.``
+   The app should now be running at ``http://localhost:5173.``
 
 
 

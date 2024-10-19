@@ -3,11 +3,8 @@ import {
     DialogContent,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from "@/components/ui/dialog"
-import { LoginButtons } from "@/pages/LoginButtons";
-import { Github, Mail } from "lucide-react"
-
+import { LoginButtons } from "@/components/auth/LoginButtons";
 
 interface NotLoggedInDialogProps {
     isOpen: boolean;
@@ -15,6 +12,7 @@ interface NotLoggedInDialogProps {
 }
 
 export const NotLoggedInDialog = ({ isOpen, setIsOpen }: NotLoggedInDialogProps) => {
+    console.log("NotLoggedInDialog")
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogContent className="sm:max-w-[425px]">

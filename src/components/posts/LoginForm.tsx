@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { LoginButtons } from '@/pages/LoginButtons'
+import { LoginButtons } from '@/components/auth/LoginButtons'
 
 function LoginForm() {
     return (

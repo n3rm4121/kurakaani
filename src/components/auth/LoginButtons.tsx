@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '@/lib/supabase/supabaseClient';
-import { Alert } from '../components/ui/alert';
-import { Button } from '../components/ui/button';
+import { Alert } from '../ui/alert';
+import { Button } from '../ui/button';
 import { FaGithub, FaGoogle } from 'react-icons/fa6';
 
 export const LoginButtons = () => {

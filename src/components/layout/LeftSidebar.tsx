@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button"
 import { User } from '@supabase/supabase-js'
 import {
     Home,
-    Bookmark,
     User as UserIcon,
     Settings,
     LineChart,
-    ScrollText
+    ScrollText,
+    Repeat2
 } from "lucide-react"
 import LoginForm from "../posts/LoginForm"
 
@@ -16,12 +16,12 @@ interface LeftSidebarProps {
 }
 
 const navigationItems = [
-    { icon: Home, label: 'Home', href: '/' },
-    { icon: ScrollText, label: 'My Posts', href: '/my-posts' },
-    { icon: Bookmark, label: 'Bookmarks', href: '/bookmarks' },
-    { icon: LineChart, label: 'Analytics', href: '/analytics' },
-    { icon: UserIcon, label: 'Profile', href: '/profile' },
-    { icon: Settings, label: 'Settings', href: '/settings' },
+    { icon: Home, label: 'Home', href: '/', active: true },
+    { icon: ScrollText, label: 'My Posts', href: '/#' },
+    { icon: Repeat2, label: 'Reposts', href: '/#' },
+    { icon: LineChart, label: 'Analytics', href: '/#' },
+    { icon: UserIcon, label: 'Profile', href: '/#' },
+    { icon: Settings, label: 'Settings', href: '/#' },
 ]
 
 export function LeftSidebar({ user }: LeftSidebarProps) {
@@ -40,7 +40,7 @@ export function LeftSidebar({ user }: LeftSidebarProps) {
                             <Button
                                 key={item.label}
                                 variant="ghost"
-                                className="w-full justify-start"
+                                className={`w-full  justify-start ${item.active ? 'text-primary' : 'text-muted-foreground'}`}
                             >
                                 <item.icon className="mr-2 h-4 w-4" />
                                 {item.label}

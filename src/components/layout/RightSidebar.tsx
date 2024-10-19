@@ -31,13 +31,7 @@ const suggestedUsers = [
         role: 'UI/UX Designer',
         avatar: '/api/placeholder/32/32'
     },
-    {
-        id: 3,
-        name: 'Maria Garcia',
-        username: '@mgarcia',
-        role: 'DevOps Engineer',
-        avatar: '/api/placeholder/32/32'
-    }
+
 ]
 
 export function RightSidebar({ user }: RightSidebarProps) {

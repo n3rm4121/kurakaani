@@ -55,6 +55,7 @@ export const PostCard = ({ post, ownerId }: PostCardProps) => {
     const repostedByArray = post.reposted_by ?? [];
 
     const handleLike = async (postId: string) => {
+
         try {
             if (!user) {
                 setShowLoginDialog(true);
@@ -88,7 +89,8 @@ export const PostCard = ({ post, ownerId }: PostCardProps) => {
     const handleRepost = async (postId: string) => {
         try {
             if (!user) {
-                return <NotLoggedInDialog isOpen={showLoginDialog} setIsOpen={setShowLoginDialog} />
+                setShowLoginDialog(true);
+                return;
             }
             const newRepostedBy = isReposted
                 ? repostedByArray.filter((id) => id !== ownerId)
@@ -118,7 +120,9 @@ export const PostCard = ({ post, ownerId }: PostCardProps) => {
 
     return (
         <div className="space-y-6">
-            <NotLoggedInDialog isOpen={showLoginDialog} setIsOpen={setShowLoginDialog} />
+            {showLoginDialog &&
+                <NotLoggedInDialog isOpen={showLoginDialog} setIsOpen={setShowLoginDialog} />
+            }
 
             <Card key={post.id}>
                 <CardHeader>
@@ -142,7 +146,7 @@ export const PostCard = ({ post, ownerId }: PostCardProps) => {
 
 
                                 onClick={() => setIsExpanded(!isExpanded)}
-                                className="text-emerald-600 ml-2 hover:text-emerald-700 hover:underline cursor-pointer"
+                                className="text-blue-600 ml-2 hover:text-blue-700 hover:underline cursor-pointer"
                                 aria-expanded={isExpanded}
                             >
                                 {isExpanded ? 'Show less' : 'Show more'}
@@ -159,12 +163,12 @@ export const PostCard = ({ post, ownerId }: PostCardProps) => {
                 </CardContent>
                 <CardFooter className="border-t">
                     <div className="flex justify-between w-full text-gray-500">
-                        <button className='rounded-full cursor-pointer' disabled={!user} onClick={() => handleLike(post.id)} >
-                            <HeartFilledIcon className={`${isLiked && 'text-red-600'} h-6 w-6 mr-1 inline ${user && 'hover:text-red-600'}`} />
+                        <button className='rounded-full cursor-pointer' onClick={() => handleLike(post.id)} >
+                            <HeartFilledIcon className={`${isLiked && 'text-red-600'} h-6 w-6 mr-1 inline hover:text-red-600`} />
                             {likeCount}
                         </button>
                         <button className='rounded-full cursor-pointer' onClick={() => handleRepost(post.id)} >
-                            <Repeat2 className={`${isReposted && 'text-blue-400'} h-6 w-6 mr-1 inline hover:text-blue-400`} />
+                            <Repeat2 className={`${isReposted && 'text-primary'} h-6 w-6 mr-1 inline hover:text-blue-400`} />
                             {repostCount}
                         </button>
                     </div>

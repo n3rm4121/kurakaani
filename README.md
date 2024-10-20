@@ -69,8 +69,6 @@ Welcome to the documentation for the project **KuraKaani** built with React! Bel
 
 ## 1. TypeScript
 
-**Why TypeScript?**
-
 - TypeScript is a statically typed superset of JavaScript that enhances code quality and developer productivity.
 - Used throughout the project to ensure type safety, catch errors early, and provide better editor support.
 - Enables us to define clear interfaces and types for components, hooks, and data structures, leading to more maintainable code.
@@ -78,8 +76,6 @@ Welcome to the documentation for the project **KuraKaani** built with React! Bel
 ---
 
 ## 2. ShadCN/UI
-
-**Why ShadCN/UI?**
 
 - ShadCN/UI is a collection of accessible and customizable React components that help build consistent user interfaces.
 - Stored in `/src/components/ui` directory as reusable UI components like buttons, forms, and dialogs. Used throughout the application to maintain a unified design system.
@@ -89,16 +85,12 @@ Welcome to the documentation for the project **KuraKaani** built with React! Bel
 
 ## 3. Context API
 
-**Why Context API?**
-
 - The Context API is a built-in feature of React that allows us to manage global state without prop drilling.
 - Used in `/src/contexts/postContext` to manage the state of posts fetched from the Supabase database and provide it to components like the Home Page in `/src/components/posts/Postlist.tsx` to update the UI when new posts are created.
 
 ---
 
 ## 4. Vite
-
-**Why Vite?**
 
 - Vite is a modern build tool that offers a fast development server and optimized production builds.
 - It leverages ESBuild for bundling, resulting in quick startup times and rapid HMR (Hot Module Replacement) updates.
@@ -107,15 +99,11 @@ Welcome to the documentation for the project **KuraKaani** built with React! Bel
 
 ## 5. Supabase
 
-**Why Supabase?**
-
 - Supabase is an open-source Firebase alternative that provides a suite of tools for building scalable applications, including authentication, database, and storage services.
 
 ---
 
 ## 6. React Router Dom
-
-**Why React Router Dom?**
 
 - React Router Dom is a declarative routing library for React that keeps the UI in sync with the URL.
 - Used in `./src/App.tsx` to define routes for different pages like Home and Docs.
@@ -124,16 +112,12 @@ Welcome to the documentation for the project **KuraKaani** built with React! Bel
 
 ## 7. UUID
 
-**Why UUID?**
-
 - UUID generates unique identifiers for entities like posts or users, ensuring global uniqueness without relying on central ID generators.
 - Used in `./src/components/CreatePostForm.tsx` to generate unique IDs for images uploaded by users.
 
 ---
 
 ## 8. Tailwind CSS
-
-**Why Tailwind CSS?**
 
 - Tailwind CSS is a utility-first CSS framework that provides low-level utility classes to style elements directly in the markup.
 - Helps to maintain a clean and responsive design without writing custom CSS.
@@ -142,16 +126,12 @@ Welcome to the documentation for the project **KuraKaani** built with React! Bel
 
 ## 9. React Hook Form
 
-**Why React Hook Form?**
-
 - React Hook Form is a performant form library that helps manage form state and validation with minimal re-renders.
 - Used in `./src/components/CreatePostForm.tsx` to handle form submission and validation for creating new posts.
 
 ---
 
 ## 10. Zod
-
-**Why Zod?**
 
 - Zod is a TypeScript-first schema declaration and validation library that ensures data consistency and type safety.
 - Used in `./src/components/CreatePostForm.tsx` to define the shape of the form data and validate it before submission.

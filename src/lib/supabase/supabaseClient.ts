@@ -1,11 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabseURL = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-
-if (!supabseURL || !supabaseKey) {
-    throw new Error("Please provide SUPABASE_URL and SUPABASE_KEY in the environment variables");
-}
+const supabseURL = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 
 export const supabase = createClient(supabseURL, supabaseKey);
 

@@ -49,8 +49,8 @@ npm install
 3. Setup Environment Variables:
  Create a `.env` file at the root of the project and add the following variables, replacing placeholders with your Supabase keys:
 ```bash
-VITE_SUPABASE_URL=your-supabase-url
-VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+VITE_REACT_APP_SUPABASE_URL=your-supabase-url
+VITE_REACT_APP_SUPABASE_ANON_KEY=your-supabase-anon-key
 ```
 4. Start the development server:
 

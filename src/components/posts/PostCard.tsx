@@ -46,7 +46,7 @@ export const PostCard = ({ post, ownerId }: PostCardProps) => {
     const [isLiked, setIsLiked] = useState(post.liked_by?.includes(ownerId));
     const [isReposted, setIsReposted] = useState(post.reposted_by?.includes(ownerId));
     const [repostCount, setRepostCount] = useState<number>(post.repost_count);
-    const [error, setError] = useState<string | null>(null);
+    const [, setError] = useState<string | null>(null);
     const [showLoginDialog, setShowLoginDialog] = useState(false);
     const { user } = useAuth();
 
@@ -73,6 +73,7 @@ export const PostCard = ({ post, ownerId }: PostCardProps) => {
                 })
                 .eq('id', postId)
                 .select();
+
 
             if (error) throw error;
 

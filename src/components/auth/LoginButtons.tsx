@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { supabase } from '@/lib/supabase/supabaseClient';
 import { Alert } from '../ui/alert';
 import { Button } from '../ui/button';
 import { FaGithub, FaGoogle } from 'react-icons/fa6';
 import Loader from '../Loader';
-import { toast } from '@/hooks/use-toast';
 
 export const LoginButtons = () => {
     const [error, setError] = useState<string | null>(null);

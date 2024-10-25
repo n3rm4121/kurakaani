@@ -8,10 +8,8 @@ import { Link } from 'react-router-dom'
 
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { LoginButtons } from '@/components/auth/LoginButtons'
